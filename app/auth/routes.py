@@ -8,6 +8,9 @@ from flask_login import login_user, logout_user
 
 @at.route('/register', methods=['GET', 'POST'])
 def register_user():
+    if current_user.is_authenticated:
+        flash('you are already logged-in')
+        return redirect(url_for('main.display_books'))
     form = RegistrationForm()
     if form.validate_on_submit():
         User.create_user(
@@ -20,9 +23,9 @@ def register_user():
 
 @at.route('/login', methods=['GET', 'POST'])
 def do_the_login():
-    # if current_user.is_authenticated:
-    #     flash('you are already logged-in')
-    #     return redirect(url_for('main.display_books'))
+    if current_user.is_authenticated:
+        flash('you are already logged-in')
+        return redirect(url_for('main.display_books'))
     form = LoginForm()
 
     if form.validate_on_submit():
