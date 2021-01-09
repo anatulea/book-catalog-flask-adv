@@ -7,7 +7,7 @@ db = SQLAlchemy()
 
 
 def create_app(config_type):
-    app = Flask()
+    app = Flask(__name__)
 
     # '/Users/anatulea/PycharmProjects/book_catalog_flask_adv/config/dev.py'
     configuration = os.path.join(os.getcwd(), 'config', config_type + '.py')
