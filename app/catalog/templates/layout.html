@@ -1,3 +1,4 @@
+{% import "bootstrap/wtf.html" as wtf %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,14 +26,23 @@
                     </a>
                     <ul class="nav navbar-nav pull-right">
                         <li><a href="#"> Home </a></li>
-                        <li><a href="#"> Register </a></li>
+                        <li><a href="{{ url_for('authentication.register_user') }}"> Register </a></li>
                     </ul>
                 </div>
             </nav>
         {% endblock navbar %}
 
+         {# flash messaging #}
+        {% for message in get_flashed_messages() %}
+                <div class=" container alert alert-info">
+                    <button type="button" class="close" data-dismiss="alert"></button>
+                    {{ message }}
+                </div>
+        {% endfor %}
+
         {# empty block for custom content #}
         {% block content %} {% endblock content %}
+
 
         {# footer #}
         {% block footer %}

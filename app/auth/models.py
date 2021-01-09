@@ -1,10 +1,10 @@
 from datetime import datetime
 from app import db, bcrypt  # app/__inti__.py
-# from flask_login import UserMixin
-# from app import login_manager
+from flask_login import UserMixin
+from app import login_manager
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     user_name = db.Column(db.String(20))
@@ -15,7 +15,7 @@ class User(db.Model):
     def check_password(self, password):
         return bcrypt.check_password_hash(self.user_password, password)
 
-    @classmethod  # used in run.py
+    @classmethod # used in run.py
     def create_user(cls, user, email, password):
         user = cls(user_name=user,
                    user_email=email,
@@ -25,6 +25,6 @@ class User(db.Model):
         return user
 
 
-# @login_manager.user_loader
-# def load_user(id):
-#     return User.query.get(int(id))
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
