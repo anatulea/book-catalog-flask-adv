@@ -2,9 +2,10 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_bootstrap import Bootstrap
 
 db = SQLAlchemy()
-
+bootstrap = Bootstrap()
 
 def create_app(config_type):
     app = Flask(__name__)
@@ -14,6 +15,7 @@ def create_app(config_type):
     app.config.from_pyfile(configuration)
 
     db.init_app(app)  # initialize database
+    bootstrap.init_app(app)  # initialize bootstrap
 
     from app.catalog import main  # import blueprint
     app.register_blueprint(main)  # register blueprint
