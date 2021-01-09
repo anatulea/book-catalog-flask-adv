@@ -25,6 +25,8 @@ class User(UserMixin, db.Model):
         return user
 
 
+# is a login Manager function that sets a callback for reloading a user from the session.
+# it takes a user id and returns 'none' if user does not exist.
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(int(id))

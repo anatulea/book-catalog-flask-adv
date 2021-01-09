@@ -25,8 +25,9 @@
                         <h3 class="title"> The Books Shop Around the Corner </h3>
                     </a>
                     <ul class="nav navbar-nav pull-right">
-                        <li><a href="#"> Home </a></li>
+                        <li><a href="{{ url_for('main.display_books') }}"> Home </a></li>
                         <li><a href="{{ url_for('authentication.register_user') }}"> Register </a></li>
+                        <li><a href="{{ url_for('authentication.do_the_login') }}"> SignIn </a></li>
                     </ul>
                 </div>
             </nav>
